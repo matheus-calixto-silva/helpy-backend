@@ -6,7 +6,8 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "lint": "eslint ."
   },
   "author": "Matheus Calixto <matheuscalixto8@gmail.com>",
   "license": "GPL-3.0 license",
