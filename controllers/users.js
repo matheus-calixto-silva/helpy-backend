@@ -19,11 +19,6 @@ const getUsers = async (limit) => {
   return users;
 };
 
-usersRouter.get('/', async (_request, response) => {
-  const users = await getUsers(10);
-  response.status(200).json(users);
-});
-
 const addProfilePicToUser = async (user, image) => {
   const { _id } = user;
   image.user = _id;
@@ -41,6 +36,11 @@ const addProfilePicToUser = async (user, image) => {
 
   return populatedUser;
 };
+
+usersRouter.get('/', async (_request, response) => {
+  const users = await getUsers(10);
+  response.status(200).json(users);
+});
 
 usersRouter.post('/', onePhotoConfig, async (request, response) => {
   const { firstName, lastName, username, email, password, phone } =
