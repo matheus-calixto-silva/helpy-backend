@@ -4,6 +4,7 @@ const aws = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
+const { info } = require('../utils/logger');
 
 const s3 = new aws.S3();
 
@@ -37,10 +38,10 @@ imageSchema.pre('remove', function () {
       })
       .promise()
       .then((response) => {
-        console.log(response.status);
+        info(response.status);
       })
       .catch((response) => {
-        console.log(response.status);
+        info(response.status);
       });
   } else {
     return promisify(fs.unlink)(
