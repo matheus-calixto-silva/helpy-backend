@@ -7,6 +7,11 @@ const Image = require('../models/image');
 
 const onePhotoConfig = multer(multerConfig).single('photo');
 
+const getUser = async (id) => {
+  const user = await User.findById(id).populate('profilePic', { url: 1 });
+  return user;
+};
+
 usersRouter.get('/', async (_request, response) => {
   const users = await User.find({}).populate('profilePic', { url: 1 });
   response.status(200).json(users);
@@ -61,13 +66,12 @@ usersRouter.post('/', onePhotoConfig, async (request, response) => {
 });
 
 usersRouter.get('/:id', async (request, response) => {
-  const user = await User.findById(request.params.id);
+  const user = await getUser(request.params.id);
   response.status(200).json(user);
 });
 
-
 usersRouter.delete('/:id', async (request, response) => {
-  const user = await User.findById(request.params.id);
+  const user = await getUser(request.params.id);
   await user.remove();
 
   response.status(204).send();
