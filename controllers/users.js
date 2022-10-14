@@ -89,7 +89,10 @@ usersRouter.get('/:id', async (request, response) => {
 
 usersRouter.delete('/:id', async (request, response) => {
   const user = await getUser(request.params.id);
+  const image = await Image.findById(user.profilePic._id.toString());
+
   await user.remove();
+  await image.remove();
 
   response.status(204).send();
 });
