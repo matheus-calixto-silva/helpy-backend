@@ -24,6 +24,24 @@ usersRouter.get('/', async (_request, response) => {
   response.status(200).json(users);
 });
 
+const addProfilePicToUser = async (user, image) => {
+  const { _id } = user;
+  image.user = _id;
+  user.profilePic = image._id;
+
+  await User.findByIdAndUpdate(user._id.toString(), user, {
+    new: true,
+  });
+
+  await Image.findByIdAndUpdate(image._id.toString(), image, {
+    new: true,
+  });
+
+  const populatedUser = getUser(user._id);
+
+  return populatedUser;
+};
+
 usersRouter.post('/', onePhotoConfig, async (request, response) => {
   const { firstName, lastName, username, email, password, phone } =
     request.body;
@@ -51,25 +69,17 @@ usersRouter.post('/', onePhotoConfig, async (request, response) => {
   });
 
   const savedUser = await user.save();
-  const { _id } = savedUser;
 
   const image = await Image.create({
     name,
     size,
     key,
     url,
-    user: {
-      _id,
-    },
   });
 
-  savedUser.profilePic = image._id;
+  const populatedUser = await addProfilePicToUser(savedUser, image);
 
-  await User.findByIdAndUpdate(savedUser._id.toString(), savedUser, {
-    new: true,
-  });
-
-  response.status(201).json(savedUser);
+  response.status(201).json(populatedUser);
 });
 
 usersRouter.get('/:id', async (request, response) => {
