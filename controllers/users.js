@@ -12,8 +12,15 @@ const getUser = async (id) => {
   return user;
 };
 
+const getUsers = async (limit) => {
+  const users = await User.find({})
+    .populate('profilePic', { url: 1 })
+    .limit(limit);
+  return users;
+};
+
 usersRouter.get('/', async (_request, response) => {
-  const users = await User.find({}).populate('profilePic', { url: 1 });
+  const users = await getUsers(10);
   response.status(200).json(users);
 });
 
