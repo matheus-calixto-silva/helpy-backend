@@ -1,0 +1,10 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "author": "Matheus Calixto <matheuscalixto8@gmail.com>",
+  "scripts": {
+    "start": "node index.ts"
+  },
+  "license": "MIT"
+}
