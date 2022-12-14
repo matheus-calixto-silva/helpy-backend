@@ -5,6 +5,7 @@
   "author": "Matheus Calixto <matheuscalixto8@gmail.com>",
   "scripts": {
     "start": "node index.ts",
+    "dev": "nodemon src/index.ts",
     "prepare": "husky install",
     "commit": "git-cz"
   },
