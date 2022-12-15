@@ -125,3 +125,10 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+#uploads
+/uploads/users/*
+/uploads/ongs/*.jpg
+/uploads/ongs/*.png
+/uploads/ongs/events/*
+
