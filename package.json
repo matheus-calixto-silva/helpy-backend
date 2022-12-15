@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
+    "aws-sdk": "^2.1275.0",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
