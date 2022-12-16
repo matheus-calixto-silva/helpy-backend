@@ -127,8 +127,4 @@ dist
 .pnp.*
 
 #uploads
-/uploads/users/*
-/uploads/ongs/*.jpg
-/uploads/ongs/*.png
-/uploads/ongs/events/*
-
+/uploads/*
