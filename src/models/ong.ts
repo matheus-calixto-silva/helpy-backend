@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { IEvent } from './event';
 
-export interface OngInterface {
+export interface IOng {
   name: string;
   username: string;
   passwordHash: string;
@@ -14,7 +14,7 @@ export interface OngInterface {
   events: IEvent[]
 }
 
-const ongSchema = new Schema<OngInterface>({
+const ongSchema = new Schema({
   name: {
     type: String,
     trim: true,
@@ -79,18 +79,10 @@ const ongSchema = new Schema<OngInterface>({
     type: Number,
     required: [true, 'Número de eventos é obrigatório']
   },
-  events: {
-    registeredEvents: {
-      type: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Event',
-        required: function (this: OngInterface) {
-          return this.events.length >= this.maxEvents
-            && 'Máximo de eventos para essa ONG foi atingido';
-        }
-      }],
-    },
-  },
+  events: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Event'
+  }],
   profilePic: {
     type: String,
     trim: true,
