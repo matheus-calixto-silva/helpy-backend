@@ -1,5 +1,10 @@
 import { model, Schema } from 'mongoose';
 
+export interface ICategory {
+  name: string
+  description: string
+}
+
 const categorySchema = new Schema({
   name: {
     type: String,
