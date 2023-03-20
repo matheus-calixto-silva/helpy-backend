@@ -24,7 +24,11 @@ export const createOngEvent = async (req: Request, res: Response) => {
   const event = await Event.create(newEvent);
 
   const updatedEvents = ong?.events ? [...ong.events, event._id] : [event._id];
-  const updatedOng = await Ong.findByIdAndUpdate(ongId, { events: updatedEvents }, { new: true });
+  await Ong.findByIdAndUpdate(ongId, { events: updatedEvents }, { new: true });
+  const ongWithPopulatedData = await Ong.findById(ongId).populate({
+    path: 'events',
+    populate: { path: 'requiredSkills' }
+  });
 
-  return res.status(200).json(updatedOng);
+  return res.status(200).json(ongWithPopulatedData);
 };
