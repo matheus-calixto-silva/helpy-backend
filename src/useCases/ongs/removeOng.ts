@@ -4,7 +4,7 @@ import fs from 'node:fs';
 
 import { Ong } from '../../models/ong';
 
-export const deleteOng = async (req: Request, res: Response) => {
+export const removeOng = async (req: Request, res: Response) => {
   const { ongId } = req.params;
 
   const user = await Ong.findById(ongId);
