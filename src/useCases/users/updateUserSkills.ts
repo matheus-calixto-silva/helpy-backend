@@ -12,10 +12,20 @@ export const updateUserSkills = async (req: Request, res: Response) => {
     .map((skillId: string) => {
       return { skill: skillId };
     });
+
   if (user) {
     const updatedSkills = [...user.skills, ...parsedSkills];
-    const updatedUser = await User.findByIdAndUpdate(userId, { skills: updatedSkills }, { new: true });
-    return res.status(200).json(updatedUser);
+
+    await User.findByIdAndUpdate(userId, { skills: updatedSkills }, { new: true });
+
+    const populatedUser = await User.findById(userId).populate({
+      path: 'skills.skill',
+      populate: {
+        path: 'category'
+      }
+    });
+
+    return res.status(200).json(populatedUser);
   } else {
     return res.status(404).json({ error: 'Usuário não encontrado' });
   }

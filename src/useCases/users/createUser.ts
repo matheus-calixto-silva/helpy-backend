@@ -23,5 +23,12 @@ export const createUser = async (req: Request, res: Response) => {
     firstname, lastname, username, profilePic, email, passwordHash, phone, skills: parsedSkills
   });
 
-  res.status(201).send(user);
+  const createdUser = await User.findById(user._id.toString()).populate({
+    path: 'skills.skill',
+    populate: {
+      path: 'category'
+    }
+  });
+
+  res.status(201).json(createdUser);
 };
