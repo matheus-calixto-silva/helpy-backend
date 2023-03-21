@@ -6,7 +6,7 @@ export const getOngById = async (req: Request, res: Response) => {
   const ong = await Ong.findById(ongId).populate({
     path: 'events',
     populate: [
-      { path: 'requiredSkills' },
+      { path: 'requiredSkills', populate: { path: 'category' } },
       { path: 'volunteers' }
     ]
   });

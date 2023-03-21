@@ -18,7 +18,7 @@ export const removeOngEvent = async (req: Request, res: Response) => {
     const updatedOng = await Ong.findById(ongId).populate({
       path: 'events',
       populate: [
-        { path: 'requiredSkills' },
+        { path: 'requiredSkills', populate: { path: 'category' } },
         { path: 'volunteers' }
       ]
     });
