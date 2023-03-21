@@ -1,17 +1,5 @@
 import { model, Schema } from 'mongoose';
-
-import { IUser } from './user';
-import { ISkill } from './skill';
-
-export interface IEvent {
-  name: string;
-  local: string;
-  date: Date;
-  description: string;
-  requiredSkills: ISkill[];
-  maxVolunteers: number;
-  volunteers: IUser[];
-}
+import { IEvent } from '../types';
 
 const eventSchema = new Schema({
   name: {
@@ -57,12 +45,10 @@ const eventSchema = new Schema({
       }
     }],
   },
-});
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 eventSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
     delete returnedObject.__v;
   },
 });

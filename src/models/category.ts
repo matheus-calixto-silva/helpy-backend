@@ -1,10 +1,5 @@
 import { model, Schema } from 'mongoose';
 
-export interface ICategory {
-  name: string
-  description: string
-}
-
 const categorySchema = new Schema({
   name: {
     type: String,
@@ -18,12 +13,10 @@ const categorySchema = new Schema({
     required: [true, 'Descrição é obrigatório'],
     minLength: 5,
   }
-});
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 categorySchema.set('toJSON', {
   transform: (_document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
     delete returnedObject.__v;
   },
 });

@@ -1,18 +1,4 @@
 import { model, Schema } from 'mongoose';
-import { IEvent } from './event';
-
-export interface IOng {
-  name: string;
-  username: string;
-  passwordHash: string;
-  email: string;
-  phone: string;
-  address: string;
-  cnpj: string;
-  maxEvents: number;
-  profilePic: string;
-  events: IEvent[]
-}
 
 const ongSchema = new Schema({
   name: {
@@ -88,12 +74,10 @@ const ongSchema = new Schema({
     trim: true,
     required: true,
   }
-});
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 ongSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
     delete returnedObject.__v;
     delete returnedObject.passwordHash;
   },

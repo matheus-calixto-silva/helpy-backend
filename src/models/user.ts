@@ -1,15 +1,5 @@
 import { model, Schema } from 'mongoose';
 
-export interface IUser {
-  firstname: string;
-  lastname: string;
-  username: string;
-  passwordHash: string;
-  email: string;
-  phone: string;
-  profilePic: string;
-}
-
 const userSchema = new Schema({
   firstname: {
     type: String,
@@ -75,12 +65,10 @@ const userSchema = new Schema({
       },
     }],
   },
-});
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 userSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
+  transform: (_document, returnedObject) => {
     delete returnedObject.__v;
     delete returnedObject.passwordHash;
   },
