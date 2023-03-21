@@ -14,6 +14,7 @@
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
     "@types/multer": "^1.4.7",
+    "@types/bcrypt": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "commitizen": "^4.2.6",
@@ -30,7 +31,6 @@
     }
   },
   "dependencies": {
-    "@types/bcrypt": "^5.0.0",
     "aws-sdk": "^2.1275.0",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
