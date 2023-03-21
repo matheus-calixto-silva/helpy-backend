@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
 
 import { User } from '../../models/user';
-import { Event, IEvent } from '../../models/event';
-import { IOng, Ong } from '../../models/ong';
+import { Event } from '../../models/event';
+import { Ong } from '../../models/ong';
 
-import { IUser } from '../../models/user';
+import { IUser } from '../../types';
+import { IEvent } from '../../types';
+import { IOng } from '../../types';
+
 
 const checkMaxVolunteers = (event: IEvent) => {
   return event.volunteers.length === event.maxVolunteers;
@@ -12,14 +15,14 @@ const checkMaxVolunteers = (event: IEvent) => {
 
 const checkIfUserIsAlredyRegistered = (user: IUser, event: IEvent) => {
   const convertedVonluteersId = event.volunteers.map(volunteer => volunteer.toString());
-  const userId = user.id;
+  const userId = user._id;
 
   return convertedVonluteersId.find(volunteer => volunteer === userId);
 };
 
 const checkIfUserHasRequiredSkill = (user: IUser, event: IEvent) => {
   const convertedRequiredSkills = event.requiredSkills.map(skill => skill.toString());
-  const allUserSkillsIds = user.skills.map(({ skill }) => skill.toString());
+  const allUserSkillsIds = user.skills.map(skill => skill._id.toString());
 
   return allUserSkillsIds.some(skill => convertedRequiredSkills.includes(skill));
 };
@@ -45,7 +48,7 @@ export const addUserToEvent = async (req: Request, res: Response) => {
       return res.status(401).json({ error: 'User is alredy registered to this event' });
     }
 
-    const updatedOngVolunteers = [...event.volunteers, user.id];
+    const updatedOngVolunteers = [...event.volunteers, user._id];
     await Event.findByIdAndUpdate(eventId, { volunteers: updatedOngVolunteers }, { new: true });
 
     const ongWithPopulatedData = await Ong.findById(ongId).populate({
