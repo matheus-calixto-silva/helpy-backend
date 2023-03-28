@@ -20,7 +20,15 @@ export const createUser = async (req: Request, res: Response) => {
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
   const user = await User.create({
-    firstname, lastname, username, profilePic, email, passwordHash, phone, skills: parsedSkills
+    firstname,
+    lastname,
+    username,
+    profilePic,
+    email,
+    passwordHash,
+    phone,
+    skills: parsedSkills,
+    role: 'user'
   });
 
   const createdUser = await User.findById(user._id.toString()).populate({
