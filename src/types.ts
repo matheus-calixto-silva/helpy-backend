@@ -10,20 +10,6 @@ export interface ISkill {
   category: ICategory
 }
 
-export interface IOng {
-  _id: string;
-  name: string;
-  username: string;
-  passwordHash: string;
-  email: string;
-  phone: string;
-  address: string;
-  cnpj: string;
-  maxEvents: number;
-  profilePic: string;
-  events: IEvent[]
-}
-
 export interface IEvent {
   _id: string;
   name: string;
@@ -34,17 +20,34 @@ export interface IEvent {
   maxVolunteers: number;
   volunteers: IUser[];
 }
-
-export interface IUser {
+interface IUserBase {
   _id: string;
   firstname: string;
   lastname: string;
   username: string;
-  passwordHash: string;
+  password?: string;
+  passwordHash?: string;
   email: string;
   phone: string;
-  skills: ISkill[];
   profilePic: string;
   created_at: number;
   updated_at: number;
+  role: string;
 }
+export interface IOng extends IUserBase {
+  address: string;
+  cnpj: string;
+  maxEvents: number;
+  events: IEvent[]
+}
+
+export interface IUser extends IUserBase {
+  skills: ISkill[];
+}
+
+export interface IAdmin extends IUserBase {
+  permissions: permissions;
+  extends: IUserBase
+}
+
+type permissions = 'create' | 'read' | 'update' | 'delete';
