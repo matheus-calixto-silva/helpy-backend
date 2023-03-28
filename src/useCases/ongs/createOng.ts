@@ -28,7 +28,8 @@ export const createOng = async (req: Request, res: Response) => {
     address,
     cnpj,
     maxEvents,
-    events: []
+    events: [],
+    role: 'ong'
   });
 
   res.status(201).send(ong);
