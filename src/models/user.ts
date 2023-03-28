@@ -65,6 +65,11 @@ const userSchema = new Schema({
       },
     }],
   },
+  role: {
+    type: String,
+    trim: true,
+    required: true,
+  },
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 userSchema.set('toJSON', {
