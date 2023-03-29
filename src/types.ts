@@ -20,7 +20,7 @@ export interface IEvent {
   maxVolunteers: number;
   volunteers: IUser[];
 }
-interface IUserBase {
+interface IAdmin {
   _id: string;
   firstname: string;
   lastname: string;
@@ -32,22 +32,17 @@ interface IUserBase {
   profilePic: string;
   created_at: number;
   updated_at: number;
-  role: string;
+  role: role;
 }
-export interface IOng extends IUserBase {
+export interface IOng extends IAdmin {
   address: string;
   cnpj: string;
   maxEvents: number;
   events: IEvent[]
 }
 
-export interface IUser extends IUserBase {
+export interface IUser extends IAdmin {
   skills: ISkill[];
 }
 
-export interface IAdmin extends IUserBase {
-  permissions: permissions;
-  extends: IUserBase
-}
-
-type permissions = 'create' | 'read' | 'update' | 'delete';
+type role = 'admin' | 'user' | 'ong';
