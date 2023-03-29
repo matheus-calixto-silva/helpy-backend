@@ -20,6 +20,7 @@ export interface IEvent {
   maxVolunteers: number;
   volunteers: IUser[];
 }
+
 export interface IAdmin {
   _id: string;
   firstname: string;
