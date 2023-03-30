@@ -7,6 +7,7 @@ import { categoriesRouter } from './controllers/categories';
 import { skillsRouter } from './controllers/skills';
 import { usersRouter } from './controllers/users';
 import { ongsRouter } from './controllers/ongs';
+import { loginRouter } from './controllers/login';
 import { MONGODB_URI, PORT } from './utils/config';
 import { info, error } from './utils/logger';
 
@@ -22,6 +23,7 @@ mongoose.connect(MONGODB_URI)
     app.use(skillsRouter);
     app.use(usersRouter);
     app.use(ongsRouter);
+    app.use(loginRouter);
 
     app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
