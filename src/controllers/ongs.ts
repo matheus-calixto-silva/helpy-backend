@@ -10,6 +10,7 @@ import { createOngEvent } from '../useCases/ongs/createOngEvent';
 import { removeOngEvent } from '../useCases/ongs/removeOngEvent';
 import { addUserToEvent } from '../useCases/ongs/addUserToEvent';
 import { getOngById } from '../useCases/ongs/getOngById';
+import { updateOng } from '../useCases/ongs/updateOng';
 
 export const ongsRouter = Router();
 
@@ -28,6 +29,8 @@ const upload = multer({
 ongsRouter.get('/ongs', listOngs);
 
 ongsRouter.get('/ongs/:ongId', getOngById);
+
+ongsRouter.put('/ongs/:ongId', updateOng);
 
 ongsRouter.get('/ongs/:ongId/events', listEventsByOng);
 
