@@ -689,9 +689,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Usuário encontrado com sucesso.",
+            "description": "Usuário encontrado",
             "schema": {
-              "$ref": "#/src/models/User"
+              "$ref": "#/definitions/User"
             }
           },
           "404": {
@@ -752,6 +752,103 @@
           "204": {
             "description": "No Content"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "63e52122b00d0c03dfc5304d"
+        },
+        "firstname": {
+          "type": "string",
+          "example": "Jhon"
+        },
+        "lastname": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "username": {
+          "type": "string",
+          "example": "john_doe"
+        },
+        "email": {
+          "type": "string",
+          "example": "john_doe@mail.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "5581988888888"
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "skill": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "6419f3540d17fe8c1b530ab6"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Desenvolvimento React"
+                  },
+                  "category": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "6419f19a0d17fe8c1b530aa8"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Programação"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Habilidades relacionadas a desenvolvimento de software"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2023-03-21T18:04:10.044Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2023-03-21T18:04:10.044Z"
+                      }
+                    }
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2023-03-21T18:11:32.357Z"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "example": "2023-03-21T18:11:32.357Z"
+                  }
+                }
+              },
+              "_id": {
+                "type": "string",
+                "example": "6424915edd50adc8b28f4dd7"
+              }
+            }
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "example": "2023-03-29T19:28:31.002Z"
+        },
+        "updated_at": {
+          "type": "string",
+          "example": "2023-03-29T19:28:31.002Z"
         }
       }
     }
