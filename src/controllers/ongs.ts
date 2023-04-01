@@ -1,5 +1,3 @@
-import path from 'node:path';
-import multer from 'multer';
 import { Router } from 'express';
 
 import { createOng } from '../useCases/ongs/createOng';
@@ -12,19 +10,9 @@ import { addUserToEvent } from '../useCases/ongs/addUserToEvent';
 import { getOngById } from '../useCases/ongs/getOngById';
 import { updateOng } from '../useCases/ongs/updateOng';
 
+import { upload } from '../utils/helpers';
+
 export const ongsRouter = Router();
-
-const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, callback) {
-      callback(null, path.resolve('uploads'));
-    },
-    filename(req, file, callback) {
-      callback(null, `${Date.now()}-${file.originalname}`);
-    },
-  }),
-});
-
 
 ongsRouter.get('/ongs', listOngs);
 
