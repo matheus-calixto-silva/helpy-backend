@@ -12,5 +12,5 @@ export const updateSkill = async (req: Request, res: Response) => {
     return res.status(404).send({ error: 'Category not found' });
   }
 
-  res.status(200).json(updatedSkill);
+  return res.status(200).json(updatedSkill);
 };
