@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { Ong } from '../../models/ong';
 
-export const listOngs = async (req: Request, res: Response) => {
+export const listOngs = async (_req: Request, res: Response) => {
   const ongs = await Ong.find().populate({
     path: 'events',
     populate: [
