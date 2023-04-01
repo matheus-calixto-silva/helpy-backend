@@ -32,5 +32,5 @@ export const createOng = async (req: Request, res: Response) => {
     role: 'ong'
   });
 
-  res.status(201).send(ong);
+  return res.status(201).send(ong);
 };
