@@ -8,10 +8,11 @@ export const removeAdmin = async (req: Request, res: Response) => {
   const { adminId } = req.params;
 
   const admin = await Admin.findById(adminId);
-  await Admin.findByIdAndDelete(adminId);
 
   if (admin) {
+    await Admin.findByIdAndDelete(adminId);
     removeProfilePic(admin.profilePic);
+
     return res.sendStatus(204);
   }
 
