@@ -12,6 +12,7 @@ import { ongsRouter } from './controllers/ongs';
 import { loginRouter } from './controllers/login';
 import { MONGODB_URI, PORT } from './utils/config';
 import { info, error } from './utils/logger';
+import { adminsRouter } from './controllers/admins';
 
 mongoose.set('strictQuery', true);
 mongoose.connect(MONGODB_URI)
@@ -25,6 +26,7 @@ mongoose.connect(MONGODB_URI)
     app.use(usersRouter);
     app.use(ongsRouter);
     app.use(loginRouter);
+    app.use(adminsRouter);
 
     app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
     app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
