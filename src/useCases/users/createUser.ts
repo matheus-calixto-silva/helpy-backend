@@ -4,6 +4,9 @@ import bcrypt from 'bcrypt';
 import { User } from '../../models/user';
 
 export const createUser = async (req: Request, res: Response) => {
+  // #swagger.tags = ['User']
+  // #swagger.description = 'Endpoint para criar um usuário.'
+
   const profilePic = req.file?.filename;
   const { firstname, lastname, username, email, password, phone, skills } = req.body;
   const parsedSkills = JSON.parse(skills);
@@ -38,5 +41,5 @@ export const createUser = async (req: Request, res: Response) => {
     }
   });
 
-  res.status(201).json(createdUser);
+  return res.status(201).json(createdUser);
 };
