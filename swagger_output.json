@@ -738,7 +738,7 @@
         "tags": [
           "User"
         ],
-        "description": "Endpoint para excluir um usuário.",
+        "description": "Endpoint para remove um usuário.",
         "parameters": [
           {
             "name": "userId",
@@ -750,7 +750,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Usuário removido"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
           }
         }
       }
