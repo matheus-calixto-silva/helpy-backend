@@ -1,6 +1,7 @@
 import path from 'node:path';
 import bcrypt from 'bcrypt';
 import multer from 'multer';
+import fs from 'node:fs';
 
 export const genNewPasswordHash = (newPassword: string) => {
   const saltRounds = 10;
@@ -20,3 +21,10 @@ export const upload = multer({
   }
   ),
 });
+
+export const removeProfilePic = (profilePicPath: string) => {
+  fs.unlink(path.resolve('uploads', profilePicPath), (err: unknown) => {
+    if (err instanceof Error) throw err;
+    console.log('File deleted!');
+  });
+};
