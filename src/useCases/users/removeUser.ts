@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import path from 'node:path';
-import fs from 'node:fs';
-
 import { User } from '../../models/user';
+
+import { removeProfilePic } from '../../utils/helpers';
 
 export const removeUser = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']
@@ -15,10 +14,7 @@ export const removeUser = async (req: Request, res: Response) => {
   await User.findByIdAndDelete(userId);
 
   if (user) {
-    fs.unlink(path.resolve('uploads', user.profilePic), (err) => {
-      if (err) throw err;
-      console.log('File deleted!');
-    });
+    removeProfilePic(user.profilePic);
 
     // #swagger.responses[204] = { description: 'Usuário removido' }
     return res.sendStatus(204);
