@@ -10,5 +10,9 @@ export const getUserById = async (req: Request, res: Response) => {
     }
   });
 
-  return res.status(200).json(user);
+  if (user) {
+    return res.status(200).json(user);
+  }
+
+  return res.status(404).send({ error: 'User not found' });
 };
