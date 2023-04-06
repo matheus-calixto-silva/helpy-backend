@@ -1,3 +1,6 @@
+import { Request } from 'express';
+import { JwtPayload } from 'jsonwebtoken';
+
 export interface ICategory {
   _id: string;
   name: string
@@ -44,6 +47,10 @@ export interface IOng extends IAdmin {
 
 export interface IUser extends IAdmin {
   skills: ISkill[];
+}
+
+export interface CustomRequest extends Request {
+  token: string | JwtPayload;
 }
 
 type role = 'admin' | 'user' | 'ong';
