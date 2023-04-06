@@ -2,7 +2,10 @@ import { Request, Response } from 'express';
 
 import { User } from '../../models/user';
 
-export const listUsers = async (req: Request, res: Response) => {
+export const listUsers = async (_req: Request, res: Response) => {
+  // #swagger.tags = ['User']
+  // #swagger.description = 'Endpoint para obter todos os usuários.'
+
   const users = await User
     .find()
     .populate({
