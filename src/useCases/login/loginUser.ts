@@ -29,6 +29,7 @@ export const loginUser = async (req: Request, res: Response) => {
   const userForToken = {
     username: user.username,
     id: user._id,
+    role: user.role
   };
 
   const token = jwt.sign(userForToken, env, {
@@ -37,5 +38,5 @@ export const loginUser = async (req: Request, res: Response) => {
 
   return res
     .status(200)
-    .json({ token, username: user.username, role: user.role });
+    .json({ token, id: user._id, username: user.username, role: user.role });
 };
