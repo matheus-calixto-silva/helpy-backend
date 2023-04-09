@@ -10,24 +10,25 @@ import { addUserToEvent } from '../useCases/ongs/addUserToEvent';
 import { getOngById } from '../useCases/ongs/getOngById';
 import { updateOng } from '../useCases/ongs/updateOng';
 
+import { auth } from '../utils/middleware';
 import { upload } from '../utils/helpers';
 
 export const ongsRouter = Router();
 
-ongsRouter.get('/ongs', listOngs);
+ongsRouter.get('/ongs', auth, listOngs);
 
-ongsRouter.get('/ongs/:ongId', getOngById);
+ongsRouter.get('/ongs/:ongId', auth, getOngById);
 
-ongsRouter.put('/ongs/:ongId', updateOng);
+ongsRouter.put('/ongs/:ongId', auth, updateOng);
 
-ongsRouter.get('/ongs/:ongId/events', listEventsByOng);
+ongsRouter.get('/ongs/:ongId/events', auth, listEventsByOng);
 
-ongsRouter.patch('/ongs/:ongId/events', createOngEvent);
+ongsRouter.patch('/ongs/:ongId/events', auth, createOngEvent);
 
-ongsRouter.patch('/ongs/:ongId/events/:eventId', removeOngEvent);
+ongsRouter.patch('/ongs/:ongId/events/:eventId', auth, removeOngEvent);
 
-ongsRouter.patch('/ongs/:ongId/events/:eventId/:userId', addUserToEvent);
+ongsRouter.patch('/ongs/:ongId/events/:eventId/:userId', auth, addUserToEvent);
 
 ongsRouter.post('/ongs', upload.single('photo'), createOng);
 
-ongsRouter.delete('/ongs/:ongId', removeOng);
+ongsRouter.delete('/ongs/:ongId', auth, removeOng);
