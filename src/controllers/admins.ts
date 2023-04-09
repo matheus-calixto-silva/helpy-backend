@@ -6,16 +6,17 @@ import { removeAdmin } from '../useCases/admins/removeAdmin';
 import { updateAdmin } from '../useCases/admins/updateAdmin';
 import { getAdminById } from '../useCases/admins/getAdminById';
 
-export const adminsRouter = Router();
-
+import { authAdmin } from '../utils/middleware';
 import { upload } from '../utils/helpers';
 
-adminsRouter.get('/admins', listAdmins);
+export const adminsRouter = Router();
 
-adminsRouter.post('/admins', upload.single('photo'), createAdmin);
+adminsRouter.get('/admins', authAdmin, listAdmins);
 
-adminsRouter.get('/admins/:adminId', getAdminById);
+adminsRouter.post('/admins', authAdmin, upload.single('photo'), createAdmin);
 
-adminsRouter.put('/admins/:adminId', updateAdmin);
+adminsRouter.get('/admins/:adminId', authAdmin, getAdminById);
 
-adminsRouter.delete('/admins/:adminId', removeAdmin);
+adminsRouter.put('/admins/:adminId', authAdmin, updateAdmin);
+
+adminsRouter.delete('/admins/:adminId', authAdmin, removeAdmin);
