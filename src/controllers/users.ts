@@ -7,18 +7,19 @@ import { updateUserSkills } from '../useCases/users/updateUserSkills';
 import { getUserById } from '../useCases/users/getUserById';
 import { updateUser } from '../useCases/users/updateUser';
 
-export const usersRouter = Router();
-
+import { auth } from '../utils/middleware';
 import { upload } from '../utils/helpers';
 
-usersRouter.get('/users', listUsers);
+export const usersRouter = Router();
+
+usersRouter.get('/users', auth, listUsers);
 
 usersRouter.post('/users', upload.single('photo'), createUser);
 
-usersRouter.get('/users/:userId', getUserById);
+usersRouter.get('/users/:userId', auth, getUserById);
 
-usersRouter.put('/users/:userId', updateUser);
+usersRouter.put('/users/:userId', auth, updateUser);
 
-usersRouter.patch('/users/:userId', updateUserSkills);
+usersRouter.patch('/users/:userId', auth, updateUserSkills);
 
-usersRouter.delete('/users/:userId', removeUser);
+usersRouter.delete('/users/:userId', auth, removeUser);
