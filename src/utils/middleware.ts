@@ -13,33 +13,27 @@ const getTokenFrom = (request: Request) => {
   return null;
 };
 
-export const auth = (req: Request, res: Response, next: NextFunction) => {
+const authenticate = (req: Request, res: Response, next: NextFunction, role?: string) => {
   const token = getTokenFrom(req);
 
   if (!token) {
     return res.status(401).send({ error: 'No token provided' });
   }
 
-  const decoded = verify(token, secret);
-  (req as CustomRequest).token = decoded;
+  const decoded = verify(token, secret) as { role?: string };
 
+  if (role && decoded.role !== role) {
+    return res.status(403).send({ error: `Unauthorized, you are not ${role}` });
+  }
+
+  (req as CustomRequest).token = decoded;
   return next();
+};
+
+export const auth = (req: Request, res: Response, next: NextFunction) => {
+  authenticate(req, res, next);
 };
 
 export const authAdmin = (req: Request, res: Response, next: NextFunction) => {
-  const token = getTokenFrom(req);
-
-  if (!token) {
-    return res.status(401).send({ error: 'No token provided' });
-  }
-
-  const decoded = verify(token, secret) as { role: string };
-
-  if (decoded.role !== 'admin') {
-    return res.status(403).send({ error: 'Unauthorized, you are not admin' });
-  }
-
-  (req as CustomRequest).token = decoded;
-  return next();
+  authenticate(req, res, next, 'admin');
 };
-
