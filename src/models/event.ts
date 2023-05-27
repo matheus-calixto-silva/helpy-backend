@@ -24,6 +24,16 @@ const eventSchema = new Schema({
     type: Date,
     required: [true, 'Data do evento é obrigatório']
   },
+  location: {
+    latitude: {
+      type: String,
+      required: [true, 'Latitude é obrigatória']
+    },
+    longitude: {
+      type: String,
+      required: [true, 'Longitude é obrigatória']
+    }
+  },
   requiredSkills: {
     type: [{
       type: Schema.Types.ObjectId,
