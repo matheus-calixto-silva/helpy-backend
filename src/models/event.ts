@@ -8,11 +8,31 @@ const eventSchema = new Schema({
     required: [true, 'Nome é obrigatório'],
     minLength: 5
   },
-  local: {
-    type: String,
-    trim: true,
-    required: [true, 'Local do evento é obrigatório'],
-    minLength: 5,
+  address: {
+    street: {
+      type: String,
+      trim: true,
+      required: [true, 'Rua é obrigatória']
+    },
+    city: {
+      type: String,
+      trim: true,
+      required: [true, 'Cidade é obrigatória']
+    },
+    uf: {
+      type: String,
+      trim: true,
+      required: [true, 'UF é obrigatória'],
+      length: 2,
+    },
+    latitude: {
+      type: String,
+      required: [true, 'Latitude é obrigatória']
+    },
+    longitude: {
+      type: String,
+      required: [true, 'Longitude é obrigatória']
+    }
   },
   description: {
     type: String,
@@ -23,16 +43,6 @@ const eventSchema = new Schema({
   date: {
     type: Date,
     required: [true, 'Data do evento é obrigatório']
-  },
-  location: {
-    latitude: {
-      type: String,
-      required: [true, 'Latitude é obrigatória']
-    },
-    longitude: {
-      type: String,
-      required: [true, 'Longitude é obrigatória']
-    }
   },
   requiredSkills: {
     type: [{
