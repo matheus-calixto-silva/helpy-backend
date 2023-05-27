@@ -5,7 +5,13 @@ import { Event } from '../../models/event';
 
 export const createOngEvent = async (req: Request, res: Response) => {
   const { ongId } = req.params;
-  const { name, local, date, description, requiredSkills, maxVolunteers } = req.body;
+  const {
+    name,
+    address,
+    date,
+    description,
+    requiredSkills,
+    maxVolunteers } = req.body;
 
   const parsedSkills = requiredSkills.split(',').filter(Boolean);
 
@@ -14,7 +20,7 @@ export const createOngEvent = async (req: Request, res: Response) => {
   if (ong) {
     const newEvent = {
       name,
-      local,
+      address,
       date,
       description,
       requiredSkills: parsedSkills,
