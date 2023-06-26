@@ -2,6 +2,7 @@ import 'dotenv/config';
 import path from 'node:path';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerFile from '../swagger_output.json';
@@ -21,6 +22,7 @@ mongoose.connect(MONGODB_URI)
     const app = express();
 
     app.use(express.static('dist'));
+    app.use(cors());
     app.use(express.json());
     app.use(categoriesRouter);
     app.use(skillsRouter);
