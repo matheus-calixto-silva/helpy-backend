@@ -6,6 +6,7 @@ import { removeUser } from '../useCases/users/removeUser';
 import { updateUserSkills } from '../useCases/users/updateUserSkills';
 import { getUserById } from '../useCases/users/getUserById';
 import { updateUser } from '../useCases/users/updateUser';
+import { listAllEvents } from '../useCases/users/listAllEvents';
 
 import { auth } from '../utils/middleware';
 import { upload } from '../utils/helpers';
@@ -13,6 +14,8 @@ import { upload } from '../utils/helpers';
 export const usersRouter = Router();
 
 usersRouter.get('/users', auth, listUsers);
+
+usersRouter.get('/users/events/all', auth, listAllEvents);
 
 usersRouter.post('/users', upload.single('photo'), createUser);
 
