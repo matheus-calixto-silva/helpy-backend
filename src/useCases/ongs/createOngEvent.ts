@@ -5,19 +5,33 @@ import { Event } from '../../models/event';
 
 export const createOngEvent = async (req: Request, res: Response) => {
   const { ongId } = req.params;
+  const eventPic = req.file?.filename;
+
   const {
     name,
-    address,
+    street,
+    city,
+    uf,
+    latitude,
+    longitude,
     date,
     description,
-    requiredSkills,
+    skills,
     maxVolunteers } = req.body;
 
-  const parsedSkills = requiredSkills.split(',').filter(Boolean);
+  const parsedSkills = skills.split(',').map((skill: string) => skill.trim());
 
   const ong = await Ong.findById(ongId);
 
   if (ong) {
+    const address = {
+      street,
+      city,
+      uf,
+      latitude,
+      longitude,
+    };
+
     const newEvent = {
       name,
       address,
@@ -25,6 +39,7 @@ export const createOngEvent = async (req: Request, res: Response) => {
       description,
       requiredSkills: parsedSkills,
       maxVolunteers,
+      eventPic,
       volunteers: [],
     };
 
