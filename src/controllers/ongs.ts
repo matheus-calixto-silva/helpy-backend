@@ -23,7 +23,7 @@ ongsRouter.put('/ongs/:ongId', auth, updateOng);
 
 ongsRouter.get('/ongs/:ongId/events', auth, listEventsByOng);
 
-ongsRouter.patch('/ongs/:ongId/events', auth, createOngEvent);
+ongsRouter.patch('/ongs/:ongId/events', auth, upload.single('photo'), createOngEvent);
 
 ongsRouter.patch('/ongs/:ongId/events/:eventId', auth, removeOngEvent);
 
