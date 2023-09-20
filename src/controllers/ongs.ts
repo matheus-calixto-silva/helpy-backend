@@ -9,6 +9,7 @@ import { removeOngEvent } from '../useCases/ongs/removeOngEvent';
 import { addUserToEvent } from '../useCases/ongs/addUserToEvent';
 import { getOngById } from '../useCases/ongs/getOngById';
 import { updateOng } from '../useCases/ongs/updateOng';
+import { getOngEventById } from '../useCases/ongs/getOngEventById';
 
 import { auth } from '../utils/middleware';
 import { upload } from '../utils/helpers';
@@ -24,6 +25,8 @@ ongsRouter.put('/ongs/:ongId', auth, updateOng);
 ongsRouter.get('/ongs/:ongId/events', auth, listEventsByOng);
 
 ongsRouter.patch('/ongs/:ongId/events', auth, upload.single('photo'), createOngEvent);
+
+ongsRouter.get('/ongs/:ongId/events/:eventId', auth, getOngEventById);
 
 ongsRouter.patch('/ongs/:ongId/events/:eventId', auth, removeOngEvent);
 
