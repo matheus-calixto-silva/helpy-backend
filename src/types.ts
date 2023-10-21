@@ -13,15 +13,39 @@ export interface ISkill {
   category: ICategory
 }
 
+export interface IAdress {
+  street: string;
+  city: string;
+  uf: string;
+  latitude: string;
+  longitude: string;
+}
+
 export interface IEvent {
   _id: string;
   name: string;
-  local: string;
+  address: IAdress;
   date: Date;
   description: string;
   requiredSkills: ISkill[];
   maxVolunteers: number;
   volunteers: IUser[];
+  eventPic: string;
+}
+
+export interface IEventForm {
+  _id: string;
+  name: string;
+  street: string;
+  city: string;
+  uf: string;
+  latitude: string;
+  longitude: string;  date: Date;
+  description: string;
+  requiredSkills: ISkill[];
+  maxVolunteers: number;
+  volunteers: IUser[];
+  eventPic: string;
 }
 
 export interface IAdmin {
