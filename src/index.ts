@@ -6,6 +6,7 @@ import cors from 'cors';
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerFile from '../swagger_output.json';
+import * as bodyParser from 'body-parser';
 import { categoriesRouter } from './controllers/categories';
 import { skillsRouter } from './controllers/skills';
 import { usersRouter } from './controllers/users';
@@ -31,6 +32,7 @@ mongoose.connect(MONGODB_URI)
     app.use(loginRouter);
     app.use(adminsRouter);
     app.use(passwordMailsRouter);
+    app.use(bodyParser.urlencoded({ extended: true }));
 
     app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
     app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
