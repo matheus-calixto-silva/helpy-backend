@@ -6,7 +6,6 @@ import { removeOng } from '../useCases/ongs/removeOng';
 import { listEventsByOng } from '../useCases/ongs/listEventsByOng';
 import { createOngEvent } from '../useCases/ongs/createOngEvent';
 import { removeOngEvent } from '../useCases/ongs/removeOngEvent';
-import { addUserToEvent } from '../useCases/ongs/addUserToEvent';
 import { getOngById } from '../useCases/ongs/getOngById';
 import { updateOng } from '../useCases/ongs/updateOng';
 import { getOngEventById } from '../useCases/ongs/getOngEventById';
@@ -27,13 +26,19 @@ ongsRouter.get('/ongs/:ongId/events', auth, listEventsByOng);
 
 ongsRouter.patch('/ongs/:ongId/events', auth, upload.single('photo'), createOngEvent);
 
-ongsRouter.patch('/ongs/:ongId/events/:eventId', auth, upload.single('photo'), updateOngEvent);
+ongsRouter.patch('/ongs/:ongId/events/:eventId/:action', auth, upload.single('photo'), (req, res) => {
+  const action = req.params.action;
+
+  if (action === 'update') {
+    updateOngEvent(req, res);
+  } else if (action === 'delete') {
+    removeOngEvent(req, res);
+  } else {
+    res.status(400).json({ message: 'Invalid action' });
+  }
+});
 
 ongsRouter.get('/ongs/:ongId/events/:eventId', auth, getOngEventById);
-
-ongsRouter.patch('/ongs/:ongId/events/:eventId', auth, removeOngEvent);
-
-ongsRouter.patch('/ongs/:ongId/events/:eventId/:userId', auth, addUserToEvent);
 
 ongsRouter.post('/ongs', upload.single('photo'), createOng);
 
