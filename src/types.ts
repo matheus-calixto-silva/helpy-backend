@@ -3,14 +3,14 @@ import { JwtPayload } from 'jsonwebtoken';
 
 export interface ICategory {
   _id: string;
-  name: string
-  description: string
+  name: string;
+  description: string;
 }
 
 export interface ISkill {
   _id: string;
-  name: string
-  category: ICategory
+  name: string;
+  category: ICategory;
 }
 
 export interface IAdress {
@@ -40,7 +40,8 @@ export interface IEventForm {
   city: string;
   uf: string;
   latitude: string;
-  longitude: string;  date: Date;
+  longitude: string;
+  date: Date;
   description: string;
   requiredSkills: ISkill[];
   maxVolunteers: number;
@@ -66,14 +67,14 @@ export interface IOng extends IAdmin {
   address: string;
   cnpj: string;
   maxEvents: number;
-  events: IEvent[]
+  events: IEvent[];
 }
 
 export interface IUser extends IAdmin {
   skills: ISkill[];
 }
 
-export interface CustomRequest extends Request {
+export interface ICustomRequest extends Request {
   token: string | JwtPayload;
 }
 
