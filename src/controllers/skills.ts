@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { createSkill } from '../useCases/skills/createSkill';
-import { updateSkill } from '../useCases/skills/updateSkill';
-import { removeSkill } from '../useCases/skills/removeSkill';
-import { listSkills } from '../useCases/skills/listSkills';
 import { getSkillById } from '../useCases/skills/getSkillById';
+import { listSkills } from '../useCases/skills/listSkills';
+import { removeSkill } from '../useCases/skills/removeSkill';
+import { updateSkill } from '../useCases/skills/updateSkill';
 
-import { auth, authAdmin } from '../utils/middleware';
+import { auth, authAdmin } from '../middlewares/autheticationMiddleware';
 
 export const skillsRouter = Router();
 

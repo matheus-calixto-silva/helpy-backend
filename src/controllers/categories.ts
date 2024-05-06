@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { createCategory } from '../useCases/categories/createCategory';
-import { updateCategory } from '../useCases/categories/updateCategory';
-import { removeCategory } from '../useCases/categories/removeCategory';
-import { listCategories } from '../useCases/categories/listCategories';
 import { getCategoryById } from '../useCases/categories/getCategoryById';
+import { listCategories } from '../useCases/categories/listCategories';
+import { removeCategory } from '../useCases/categories/removeCategory';
+import { updateCategory } from '../useCases/categories/updateCategory';
 
-import { auth, authAdmin } from '../utils/middleware';
+import { auth, authAdmin } from '../middlewares/autheticationMiddleware';
 
 export const categoriesRouter = Router();
 
