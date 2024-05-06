@@ -10,7 +10,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import'],
+  plugins: ['@typescript-eslint', 'import', 'prettier'],
   rules: {
     eqeqeq: 'error',
     indent: ['error', 2],
