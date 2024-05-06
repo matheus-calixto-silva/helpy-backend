@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import { CustomRequest } from '../types';
+import { ICustomRequest } from '../types';
 
 const secret = process.env.SECRET as string;
 
@@ -13,7 +13,12 @@ const getTokenFrom = (request: Request) => {
   return null;
 };
 
-const authenticate = (req: Request, res: Response, next: NextFunction, role?: string) => {
+const authenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+  role?: string,
+) => {
   const token = getTokenFrom(req);
 
   if (!token) {
@@ -26,7 +31,7 @@ const authenticate = (req: Request, res: Response, next: NextFunction, role?: st
     return res.status(403).send({ error: `Unauthorized, you are not ${role}` });
   }
 
-  (req as CustomRequest).token = decoded;
+  (req as ICustomRequest).token = decoded;
   return next();
 };
 
