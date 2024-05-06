@@ -1,40 +1,54 @@
 module.exports = {
-  'env': {
-    'es2021': true,
-    'node': true
+  env: {
+    es2021: true,
+    node: true,
   },
-  'extends': [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
-  ],
-  'overrides': [
-  ],
-  'parser': '@typescript-eslint/parser',
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module'
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  overrides: [],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  'plugins': [
-    '@typescript-eslint'
-  ],
-  'rules': {
+  plugins: ['@typescript-eslint', 'import'],
+  rules: {
     eqeqeq: 'error',
-    'indent': [
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    'import/extensions': [
       'error',
-      2
+      'ignorePackages',
+      {
+        ts: 'never',
+      },
     ],
-    'linebreak-style': [
+    'import/order': [
       'error',
-      'unix'
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        alphabetize: { order: 'asc', caseInsensitive: true },
+        'newlines-between': 'always',
+      },
     ],
-    'quotes': [
+    '@typescript-eslint/naming-convention': [
       'error',
-      'single'
+      {
+        selector: 'interface',
+        format: ['PascalCase'],
+        custom: {
+          regex: '^I[A-Z]',
+          match: true,
+        },
+      },
     ],
-    'semi': [
-      'error',
-      'always'
-    ]
-  }
+  },
 };
-  
