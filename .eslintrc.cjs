@@ -17,6 +17,11 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'import/resolver': {
+      node: {
+        extensions: ['.ts'],
+      },
+    },
     'import/extensions': [
       'error',
       'ignorePackages',
