@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
-import { createAdmin } from '../useCases/admins/createAdmin';
-import { getAdminById } from '../useCases/admins/getAdminById';
-import { listAdmins } from '../useCases/admins/listAdmins';
-import { removeAdmin } from '../useCases/admins/removeAdmin';
-import { updateAdmin } from '../useCases/admins/updateAdmin';
+import { createAdmin } from '@useCases/admins/createAdmin';
+import { getAdminById } from '@useCases/admins/getAdminById';
+import { listAdmins } from '@useCases/admins/listAdmins';
+import { removeAdmin } from '@useCases/admins/removeAdmin';
+import { updateAdmin } from '@useCases/admins/updateAdmin';
 
-import { authAdmin } from '../middlewares/autheticationMiddleware';
-import { upload } from '../utils/helpers';
+import { authAdmin } from '@middlewares/autheticationMiddleware';
+import { upload } from '@utils/helpers';
 
 export const adminsRouter = Router();
 
