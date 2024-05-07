@@ -1,24 +1,24 @@
-import 'dotenv/config';
-import path from 'node:path';
-import express from 'express';
-import mongoose from 'mongoose';
+import { adminsRouter } from '@controllers/admins';
+import { categoriesRouter } from '@controllers/categories';
+import { loginRouter } from '@controllers/login';
+import { ongsRouter } from '@controllers/ongs';
+import { passwordMailsRouter } from '@controllers/passwordMails';
+import { skillsRouter } from '@controllers/skills';
+import { usersRouter } from '@controllers/users';
+import { MONGODB_URI, PORT } from '@utils/config';
+import { error, info } from '@utils/logger';
+import * as bodyParser from 'body-parser';
 import cors from 'cors';
+import express from 'express';
 import 'express-async-errors';
+import mongoose from 'mongoose';
+import path from 'node:path';
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerFile from '../swagger_output.json';
-import * as bodyParser from 'body-parser';
-import { categoriesRouter } from './controllers/categories';
-import { skillsRouter } from './controllers/skills';
-import { usersRouter } from './controllers/users';
-import { ongsRouter } from './controllers/ongs';
-import { loginRouter } from './controllers/login';
-import { MONGODB_URI, PORT } from './utils/config';
-import { info, error } from './utils/logger';
-import { adminsRouter } from './controllers/admins';
-import { passwordMailsRouter } from './controllers/passwordMails';
 
 mongoose.set('strictQuery', true);
-mongoose.connect(MONGODB_URI)
+mongoose
+  .connect(MONGODB_URI)
   .then(() => {
     const app = express();
 
@@ -35,7 +35,10 @@ mongoose.connect(MONGODB_URI)
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-    app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
+    app.use(
+      '/uploads',
+      express.static(path.resolve(__dirname, '..', 'uploads')),
+    );
 
     app.listen(PORT, () => {
       info(`🚀 Server is running on http://localhost:${PORT}`);
