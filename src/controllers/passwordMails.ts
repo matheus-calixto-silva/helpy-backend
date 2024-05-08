@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { sendResetPasswordEmail } from '../useCases/passwordMails/sendResetPasswordEmail';
-import { resetPassword } from './../useCases/passwordMails/resetPassword';
+import { resetPassword } from '@useCases/passwordMails/resetPassword';
+import { sendResetPasswordEmail } from '@useCases/passwordMails/sendResetPasswordEmail';
 
 export const passwordMailsRouter = Router();
 
