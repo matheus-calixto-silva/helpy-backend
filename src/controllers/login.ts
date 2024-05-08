@@ -1,5 +1,5 @@
+import { loginUser } from '@useCases/login/loginUser';
 import { Router } from 'express';
-import { loginUser } from '../useCases/login/loginUser';
 
 export const loginRouter = Router();
 
