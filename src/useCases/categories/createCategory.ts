@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Category } from '../../models/category';
+import { Category } from '@models/category';
 
 export const createCategory = async (req: Request, res: Response) => {
   const { name, description } = req.body;
