@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
-import { Admin } from '../../models/admin';
+import { Admin } from '@models/admin';
 import { IAdmin } from './../../types';
 
-import { genNewPasswordHash } from '../../utils/helpers';
+import { genNewPasswordHash } from '@utils/helpers';
 
 export const updateAdmin = async (req: Request, res: Response) => {
   const { adminId } = req.params;
@@ -19,11 +19,17 @@ export const updateAdmin = async (req: Request, res: Response) => {
       const { password, ...withoutPassword } = updates;
       obj = { ...withoutPassword };
 
-      const updatedAdminWithPassword = await Admin.findByIdAndUpdate(adminId, obj, { new: true });
+      const updatedAdminWithPassword = await Admin.findByIdAndUpdate(
+        adminId,
+        obj,
+        { new: true },
+      );
       return res.status(200).json(updatedAdminWithPassword);
     }
 
-    const updatedAdmin = await Admin.findByIdAndUpdate(adminId, updates, { new: true });
+    const updatedAdmin = await Admin.findByIdAndUpdate(adminId, updates, {
+      new: true,
+    });
     return res.status(200).json(updatedAdmin);
   }
 
