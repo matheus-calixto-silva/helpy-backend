@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { Admin } from '../../models/admin';
+import { Admin } from '@models/admin';
 
-import { removeProfilePic } from '../../utils/helpers';
+import { removeProfilePic } from '@utils/helpers';
 
 export const removeAdmin = async (req: Request, res: Response) => {
   const { adminId } = req.params;
