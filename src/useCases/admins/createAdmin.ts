@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { Admin } from '../../models/admin';
+import { Admin } from '@models/admin';
 
-import { genNewPasswordHash } from '../../utils/helpers';
+import { genNewPasswordHash } from '@utils/helpers';
 
 export const createAdmin = async (req: Request, res: Response) => {
   const profilePic = req.file?.filename;
@@ -26,7 +26,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     email,
     passwordHash,
     phone,
-    role: 'admin'
+    role: 'admin',
   });
 
   const createdAdmin = await Admin.findById(admin._id.toString());
