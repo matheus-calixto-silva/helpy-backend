@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { Admin } from '../../models/admin';
+
+import { Admin } from '@models/admin';
 
 export const getAdminById = async (req: Request, res: Response) => {
   const { adminId } = req.params;
