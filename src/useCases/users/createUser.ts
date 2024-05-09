@@ -1,14 +1,16 @@
 import { Request, Response } from 'express';
+
 import bcrypt from 'bcrypt';
 
-import { User } from '../../models/user';
+import { User } from '@models/user';
 
 export const createUser = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']
   // #swagger.description = 'Endpoint para criar um usuário.'
 
   const profilePic = req.file?.filename;
-  const { firstname, lastname, username, email, password, phone, skills } = req.body;
+  const { firstname, lastname, username, email, password, phone, skills } =
+    req.body;
   const parsedSkills = JSON.parse(skills);
 
   const existingUser = await User.findOne({ username });
@@ -31,14 +33,14 @@ export const createUser = async (req: Request, res: Response) => {
     passwordHash,
     phone,
     skills: parsedSkills,
-    role: 'user'
+    role: 'user',
   });
 
   const createdUser = await User.findById(user._id.toString()).populate({
     path: 'skills.skill',
     populate: {
-      path: 'category'
-    }
+      path: 'category',
+    },
   });
 
   return res.status(201).json(createdUser);

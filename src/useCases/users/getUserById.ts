@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { User } from '../../models/user';
+
+import { User } from '@models/user';
 
 export const getUserById = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']
@@ -10,8 +11,8 @@ export const getUserById = async (req: Request, res: Response) => {
   const user = await User.findById(userId).populate({
     path: 'skills.skill',
     populate: {
-      path: 'category'
-    }
+      path: 'category',
+    },
   });
 
   if (user) {

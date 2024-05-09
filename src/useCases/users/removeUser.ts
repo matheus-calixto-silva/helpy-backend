@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { User } from '../../models/user';
 
-import { removeProfilePic } from '../../utils/helpers';
+import { User } from '@models/user';
+import { removeProfilePic } from '@utils/helpers';
 
 export const removeUser = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']

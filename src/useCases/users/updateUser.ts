@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
-import { User } from '../../models/user';
+import { User } from '@models/user';
 import { IUser } from '../../types';
 
-import { genNewPasswordHash } from '../../utils/helpers';
+import { genNewPasswordHash } from '@utils/helpers';
 
 export const updateUser = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']
@@ -23,7 +23,11 @@ export const updateUser = async (req: Request, res: Response) => {
       const { password, ...withoutPassword } = updates;
       obj = { ...withoutPassword };
 
-      const updatedUserWithPassword = await User.findByIdAndUpdate(userId, obj, { new: true });
+      const updatedUserWithPassword = await User.findByIdAndUpdate(
+        userId,
+        obj,
+        { new: true },
+      );
       /* #swagger.responses[200] = {
           schema: { $ref: "#/definitions/User" },
           description: 'Usuário atualizado'
@@ -31,7 +35,9 @@ export const updateUser = async (req: Request, res: Response) => {
       return res.status(200).json(updatedUserWithPassword);
     }
 
-    const updatedUser = await User.findByIdAndUpdate(userId, updates, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(userId, updates, {
+      new: true,
+    });
     /* #swagger.responses[200] = {
         schema: { $ref: "#/definitions/UpdatedUser" },
         description: 'Usuário atualizado'

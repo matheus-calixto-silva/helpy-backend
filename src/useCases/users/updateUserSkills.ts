@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { User } from '../../models/user';
+import { User } from '@models/user';
 
 export const updateUserSkills = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']
@@ -20,13 +20,17 @@ export const updateUserSkills = async (req: Request, res: Response) => {
   if (user) {
     const updatedSkills = [...user.skills, ...parsedSkills];
 
-    await User.findByIdAndUpdate(userId, { skills: updatedSkills }, { new: true });
+    await User.findByIdAndUpdate(
+      userId,
+      { skills: updatedSkills },
+      { new: true },
+    );
 
     const populatedUser = await User.findById(userId).populate({
       path: 'skills.skill',
       populate: {
-        path: 'category'
-      }
+        path: 'category',
+      },
     });
 
     // #swagger.responses[200] = { description: 'Skills do usuário atualizados' }
