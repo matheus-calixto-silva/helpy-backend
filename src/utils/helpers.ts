@@ -1,14 +1,6 @@
-import path from 'node:path';
-import bcrypt from 'bcrypt';
 import multer from 'multer';
 import fs from 'node:fs';
-
-export const genNewPasswordHash = (newPassword: string) => {
-  const saltRounds = 10;
-  const passwordHash = bcrypt.hash(newPassword, saltRounds);
-
-  return passwordHash;
-};
+import path from 'node:path';
 
 export const upload = multer({
   storage: multer.diskStorage({
@@ -18,8 +10,7 @@ export const upload = multer({
     filename(_req, file, callback) {
       callback(null, `${Date.now()}-${file.originalname}`);
     },
-  }
-  ),
+  }),
 });
 
 export const removeProfilePic = (profilePicPath: string) => {

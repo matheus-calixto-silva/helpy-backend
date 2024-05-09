@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { User } from '@models/user';
 import { IUser } from '../../types';
 
-import { genNewPasswordHash } from '@utils/helpers';
+import { genNewPasswordHash } from '@lib/genNewPasswordHash';
 
 export const updateUser = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']

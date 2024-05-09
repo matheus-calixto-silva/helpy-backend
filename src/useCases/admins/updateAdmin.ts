@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { Admin } from '@models/admin';
 import { IAdmin } from './../../types';
 
-import { genNewPasswordHash } from '@utils/helpers';
+import { genNewPasswordHash } from '@lib/genNewPasswordHash';
 
 export const updateAdmin = async (req: Request, res: Response) => {
   const { adminId } = req.params;

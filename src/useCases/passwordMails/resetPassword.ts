@@ -8,7 +8,7 @@ import { User } from '@models/user';
 import { IAdmin, IOng, IUser } from '../../types';
 
 import { env } from '@config/env';
-import { genNewPasswordHash } from '@utils/helpers';
+import { genNewPasswordHash } from '@lib/genNewPasswordHash';
 
 const UpdateUserByRole = async (
   user: IAdmin | IOng | IUser,
