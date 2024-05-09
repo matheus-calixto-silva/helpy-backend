@@ -1,3 +1,4 @@
+import { env } from '@config/env';
 import { adminsRouter } from '@controllers/admins';
 import { categoriesRouter } from '@controllers/categories';
 import { loginRouter } from '@controllers/login';
@@ -5,7 +6,6 @@ import { ongsRouter } from '@controllers/ongs';
 import { passwordMailsRouter } from '@controllers/passwordMails';
 import { skillsRouter } from '@controllers/skills';
 import { usersRouter } from '@controllers/users';
-import { MONGODB_URI, PORT } from '@utils/config';
 import { error, info } from '@utils/logger';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
@@ -18,7 +18,7 @@ import * as swaggerFile from '../swagger_output.json';
 
 mongoose.set('strictQuery', true);
 mongoose
-  .connect(MONGODB_URI)
+  .connect(env.mongodbUri)
   .then(() => {
     const app = express();
 
@@ -40,9 +40,9 @@ mongoose
       express.static(path.resolve(__dirname, '..', 'uploads')),
     );
 
-    app.listen(PORT, () => {
-      info(`🚀 Server is running on http://localhost:${PORT}`);
-      info(`API documentation: http://localhost:${PORT}/doc`);
+    app.listen(env.port, () => {
+      info(`🚀 Server is running on http://localhost:${env.port}`);
+      info(`API documentation: http://localhost:${env.port}/doc`);
       info('connected to mongodb');
     });
   })

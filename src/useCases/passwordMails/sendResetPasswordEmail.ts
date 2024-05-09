@@ -6,10 +6,10 @@ import { Admin } from '@models/admin';
 import { Ong } from '@models/ong';
 import { User } from '@models/user';
 
-import { PORT, transporter } from '@utils/config';
+import { transporter } from '@utils/config';
 import { IAdmin, IOng, IUser } from '../../types';
 
-const secret = process.env.SECRET as string;
+import { env } from '@config/env';
 
 export const sendResetPasswordEmail = async (req: Request, res: Response) => {
   const { email } = req.body;
@@ -23,9 +23,9 @@ export const sendResetPasswordEmail = async (req: Request, res: Response) => {
     return res.status(404).send('Usuário não encontrado');
   }
 
-  const token = jwt.sign({ _id: user._id }, secret);
+  const token = jwt.sign({ _id: user._id }, env.secretKey);
 
-  const resetUrl = `http://localhost:${PORT}/reset-password/${token}`;
+  const resetUrl = `http://localhost:${env.port}/reset-password/${token}`;
   const mailOptions: SendMailOptions = {
     to: email,
     subject: 'Redefinição de senha',

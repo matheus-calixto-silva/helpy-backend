@@ -12,10 +12,11 @@
     "resolveJsonModule": true,
     "baseUrl": "./src",
     "paths": {
-      "@models/*": ["./models/*"],
-      "@useCases/*": ["./useCases/*"],
+      "@config/*": ["./config/*"],
       "@controllers/*": ["./controllers/*"],
+      "@models/*": ["./models/*"],
       "@middlewares/*": ["./middlewares/*"],
+      "@useCases/*": ["./useCases/*"],
       "@utils/*": ["./utils/*"],
     }
   },

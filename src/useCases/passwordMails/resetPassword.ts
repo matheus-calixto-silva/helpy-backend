@@ -7,10 +7,8 @@ import { User } from '@models/user';
 
 import { IAdmin, IOng, IUser } from '../../types';
 
-import { SECRET_KEY } from '@utils/config';
+import { env } from '@config/env';
 import { genNewPasswordHash } from '@utils/helpers';
-
-const secret = SECRET_KEY;
 
 const UpdateUserByRole = async (
   user: IAdmin | IOng | IUser,
@@ -40,7 +38,7 @@ export const resetPassword = async (req: Request, res: Response) => {
   const { password } = req.body;
 
   if (token && password) {
-    const decoded = verify(token, secret) as { _id: string };
+    const decoded = verify(token, env.secretKey) as { _id: string };
 
     const user: IAdmin | IOng | IUser | null =
       (await User.findById(decoded._id)) ||

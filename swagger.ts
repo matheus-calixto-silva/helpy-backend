@@ -1,16 +1,17 @@
 import swaggerAutogen from 'swagger-autogen';
-import { PORT } from './src/utils/config';
+
+import { env } from '@config/env';
 
 const outputFile = './swagger_output.json';
-const endpointsFiles = ['./src/controllers/**/*.ts'];
+const endpointsFiles = ['@controllers/**/*.ts'];
 
 const doc = {
   info: {
     version: '1.0.0',
     title: 'Helpy API Documentation',
-    description: 'Helpy REST API Documentation'
+    description: 'Helpy REST API Documentation',
   },
-  host: `localhost:${PORT}`,
+  host: `localhost:${env.port}`,
   basePath: '/',
   schemes: ['http'],
   consumes: ['application/json'],
@@ -19,12 +20,10 @@ const doc = {
     bearerAuth: {
       type: 'apiKey',
       name: 'Authorization',
-      in: 'header'
-    }
+      in: 'header',
+    },
   },
-  security: [
-    { bearerAuth: [] }
-  ],
+  security: [{ bearerAuth: [] }],
   definitions: {
     User: {
       _id: '63e52122b00d0c03dfc5304d',
@@ -41,18 +40,19 @@ const doc = {
             category: {
               _id: '6419f19a0d17fe8c1b530aa8',
               name: 'Programação',
-              description: 'Habilidades relacionadas a desenvolvimento de software',
+              description:
+                'Habilidades relacionadas a desenvolvimento de software',
               created_at: '2023-03-21T18:04:10.044Z',
-              updated_at: '2023-03-21T18:04:10.044Z'
+              updated_at: '2023-03-21T18:04:10.044Z',
             },
             created_at: '2023-03-21T18:11:32.357Z',
-            updated_at: '2023-03-21T18:11:32.357Z'
+            updated_at: '2023-03-21T18:11:32.357Z',
           },
-          _id: '6424915edd50adc8b28f4dd7'
-        }
+          _id: '6424915edd50adc8b28f4dd7',
+        },
       ],
       created_at: '2023-03-29T19:28:31.002Z',
-      updated_at: '2023-03-29T19:28:31.002Z'
+      updated_at: '2023-03-29T19:28:31.002Z',
     },
     UpdatedUser: {
       _id: '63e52122b00d0c03dfc5304d',
@@ -69,18 +69,19 @@ const doc = {
             category: {
               _id: '6419f19a0d17fe8c1b530aa8',
               name: 'Programação',
-              description: 'Habilidades relacionadas a desenvolvimento de software',
+              description:
+                'Habilidades relacionadas a desenvolvimento de software',
               created_at: '2023-03-21T18:04:10.044Z',
-              updated_at: '2023-03-21T18:04:10.044Z'
+              updated_at: '2023-03-21T18:04:10.044Z',
             },
             created_at: '2023-03-21T18:11:32.357Z',
-            updated_at: '2023-03-21T18:11:32.357Z'
+            updated_at: '2023-03-21T18:11:32.357Z',
           },
-          _id: '6424915edd50adc8b28f4dd7'
-        }
+          _id: '6424915edd50adc8b28f4dd7',
+        },
       ],
       created_at: '2023-03-29T19:28:31.002Z',
-      updated_at: '2023-03-29T19:28:31.002Z'
+      updated_at: '2023-03-29T19:28:31.002Z',
     },
     UserUpdatedSkills: {
       skills: [
@@ -91,14 +92,15 @@ const doc = {
             category: {
               _id: '6419f19a0d17fe8c1b530aa8',
               name: 'Programação',
-              description: 'Habilidades relacionadas a desenvolvimento de software',
+              description:
+                'Habilidades relacionadas a desenvolvimento de software',
               created_at: '2023-03-21T18: 04: 10.044Z',
-              updated_at: '2023-03-21T18: 04: 10.044Z'
+              updated_at: '2023-03-21T18: 04: 10.044Z',
             },
             created_at: '2023-03-21T18: 11: 51.401Z',
-            updated_at: '2023-03-21T18: 11: 51.401Z'
+            updated_at: '2023-03-21T18: 11: 51.401Z',
           },
-          _id: '642c6089b725de9847f41a8c'
+          _id: '642c6089b725de9847f41a8c',
         },
         {
           skill: {
@@ -107,16 +109,17 @@ const doc = {
             category: {
               _id: '6419f19a0d17fe8c1b530aa9',
               name: 'Programação',
-              description: 'Habilidades relacionadas a desenvolvimento de software',
+              description:
+                'Habilidades relacionadas a desenvolvimento de software',
               created_at: '2023-03-21T18: 04: 10.044Z',
-              updated_at: '2023-03-21T18: 04: 10.044Z'
+              updated_at: '2023-03-21T18: 04: 10.044Z',
             },
             created_at: '2023-03-21T18: 11: 32.358Z',
-            updated_at: '2023-03-21T18: 11: 32.358Z'
+            updated_at: '2023-03-21T18: 11: 32.358Z',
           },
-          _id: '6427876941022d82f3aa8754'
-        }
-      ]
+          _id: '6427876941022d82f3aa8754',
+        },
+      ],
     },
   },
 };
