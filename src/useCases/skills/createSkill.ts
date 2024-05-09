@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Skill } from '../../models/skill';
+import { Skill } from '@models/skill';
 
 export const createSkill = async (req: Request, res: Response) => {
   const { name, category } = req.body;
