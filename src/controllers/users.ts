@@ -10,8 +10,8 @@ import { removeUser } from '@useCases/users/removeUser';
 import { updateUser } from '@useCases/users/updateUser';
 import { updateUserSkills } from '@useCases/users/updateUserSkills';
 
+import { uploadPhoto } from '@lib/uploadPhoto';
 import { auth } from '@middlewares/autheticationMiddleware';
-import { upload } from '@utils/helpers';
 
 export const usersRouter = Router();
 
@@ -21,7 +21,7 @@ usersRouter.get('/users/events/all', auth, listAllEvents);
 
 usersRouter.get('/users/events/:eventId', auth, getOngEventById);
 
-usersRouter.post('/users', upload.single('photo'), createUser);
+usersRouter.post('/users', uploadPhoto.single('photo'), createUser);
 
 usersRouter.get('/users/:userId', auth, getUserById);
 

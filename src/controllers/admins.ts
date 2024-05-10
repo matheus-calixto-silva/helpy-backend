@@ -6,14 +6,19 @@ import { listAdmins } from '@useCases/admins/listAdmins';
 import { removeAdmin } from '@useCases/admins/removeAdmin';
 import { updateAdmin } from '@useCases/admins/updateAdmin';
 
+import { uploadPhoto } from '@lib/uploadPhoto';
 import { authAdmin } from '@middlewares/autheticationMiddleware';
-import { upload } from '@utils/helpers';
 
 export const adminsRouter = Router();
 
 adminsRouter.get('/admins', authAdmin, listAdmins);
 
-adminsRouter.post('/admins', authAdmin, upload.single('photo'), createAdmin);
+adminsRouter.post(
+  '/admins',
+  authAdmin,
+  uploadPhoto.single('photo'),
+  createAdmin,
+);
 
 adminsRouter.get('/admins/:adminId', authAdmin, getAdminById);
 

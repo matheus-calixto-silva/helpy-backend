@@ -11,8 +11,8 @@ import { removeOngEvent } from '@useCases/ongs/removeOngEvent';
 import { updateOng } from '@useCases/ongs/updateOng';
 import { updateOngEvent } from '@useCases/ongs/updateOngEvent';
 
-import { auth } from '../middlewares/autheticationMiddleware';
-import { upload } from '../utils/helpers';
+import { uploadPhoto } from '@lib/uploadPhoto';
+import { auth } from '@middlewares/autheticationMiddleware';
 
 export const ongsRouter = Router();
 
@@ -27,14 +27,14 @@ ongsRouter.get('/ongs/:ongId/events', auth, listEventsByOng);
 ongsRouter.patch(
   '/ongs/:ongId/events',
   auth,
-  upload.single('photo'),
+  uploadPhoto.single('photo'),
   createOngEvent,
 );
 
 ongsRouter.patch(
   '/ongs/:ongId/events/:eventId/:action',
   auth,
-  upload.single('photo'),
+  uploadPhoto.single('photo'),
   (req, res) => {
     const action = req.params.action;
 
@@ -50,6 +50,6 @@ ongsRouter.patch(
 
 ongsRouter.get('/ongs/:ongId/events/:eventId', auth, getOngEventById);
 
-ongsRouter.post('/ongs', upload.single('photo'), createOng);
+ongsRouter.post('/ongs', uploadPhoto.single('photo'), createOng);
 
 ongsRouter.delete('/ongs/:ongId', auth, removeOng);
