@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { Admin } from '@models/admin';
 
-import { removeProfilePic } from '@utils/helpers';
+import { removePhoto } from '@utils/removePhoto';
 
 export const removeAdmin = async (req: Request, res: Response) => {
   const { adminId } = req.params;
@@ -11,7 +11,7 @@ export const removeAdmin = async (req: Request, res: Response) => {
 
   if (admin) {
     await Admin.findByIdAndDelete(adminId);
-    removeProfilePic(admin.profilePic);
+    removePhoto(admin.profilePic);
 
     return res.sendStatus(204);
   }

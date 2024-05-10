@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { User } from '@models/user';
-import { removeProfilePic } from '@utils/helpers';
+import { removePhoto } from '@utils/removePhoto';
 
 export const removeUser = async (req: Request, res: Response) => {
   // #swagger.tags = ['User']
@@ -14,7 +14,7 @@ export const removeUser = async (req: Request, res: Response) => {
   await User.findByIdAndDelete(userId);
 
   if (user) {
-    removeProfilePic(user.profilePic);
+    removePhoto(user.profilePic);
 
     // #swagger.responses[204] = { description: 'Usuário removido' }
     return res.sendStatus(204);

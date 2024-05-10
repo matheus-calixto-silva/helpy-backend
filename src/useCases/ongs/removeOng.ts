@@ -1,21 +1,19 @@
 import { Request, Response } from 'express';
-import path from 'node:path';
-import fs from 'node:fs';
 
-import { Ong } from '../../models/ong';
+import { Ong } from '@models/ong';
+
+import { removePhoto } from '@utils/removePhoto';
 
 export const removeOng = async (req: Request, res: Response) => {
   const { ongId } = req.params;
 
-  const user = await Ong.findById(ongId);
-  await Ong.findByIdAndDelete(ongId);
+  const ong = await Ong.findById(ongId);
 
-  if (user) {
-    fs.unlink(path.resolve('uploads', user.profilePic), (err) => {
-      if (err) throw err;
-      console.log('File deleted!');
-    });
+  if (ong) {
+    await Ong.findByIdAndDelete(ongId);
+    removePhoto(ong.profilePic);
+    return res.sendStatus(204);
+  } else {
+    return res.status(404).send({ error: 'Error: ONG not found' });
   }
-
-  res.sendStatus(204);
 };
