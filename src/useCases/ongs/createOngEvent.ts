@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import { Ong } from '../../models/ong';
-import { Event } from '../../models/event';
+import { Event } from '@models/event';
+import { Ong } from '@models/ong';
 
 export const createOngEvent = async (req: Request, res: Response) => {
   const { ongId } = req.params;
@@ -17,7 +17,8 @@ export const createOngEvent = async (req: Request, res: Response) => {
     date,
     description,
     skills,
-    maxVolunteers } = req.body;
+    maxVolunteers,
+  } = req.body;
 
   const parsedSkills = skills.split(',').map((skill: string) => skill.trim());
 
@@ -45,16 +46,22 @@ export const createOngEvent = async (req: Request, res: Response) => {
 
     const event = await Event.create(newEvent);
 
-    const updatedEvents = ong?.events ? [...ong.events, event._id] : [event._id];
+    const updatedEvents = ong?.events
+      ? [...ong.events, event._id]
+      : [event._id];
 
-    await Ong.findByIdAndUpdate(ongId, { events: updatedEvents }, { new: true });
+    await Ong.findByIdAndUpdate(
+      ongId,
+      { events: updatedEvents },
+      { new: true },
+    );
 
     const ongWithPopulatedData = await Ong.findById(ongId).populate({
       path: 'events',
       populate: [
         { path: 'requiredSkills', populate: { path: 'category' } },
-        { path: 'volunteers' }
-      ]
+        { path: 'volunteers' },
+      ],
     });
 
     return res.status(200).json(ongWithPopulatedData);

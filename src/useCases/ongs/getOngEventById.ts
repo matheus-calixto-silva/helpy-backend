@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Event } from '../../models/event';
+import { Event } from '@models/event';
 
 export const getOngEventById = async (req: Request, res: Response) => {
   const { eventId } = req.params;
@@ -8,7 +8,7 @@ export const getOngEventById = async (req: Request, res: Response) => {
   try {
     const foundEvent = await Event.findById(eventId).populate([
       { path: 'requiredSkills', populate: { path: 'category' } },
-      { path: 'volunteers' }
+      { path: 'volunteers' },
     ]);
 
     if (foundEvent) {
@@ -17,6 +17,8 @@ export const getOngEventById = async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Event not found' });
     }
   } catch (error) {
-    return res.status(500).json({ error: 'An error occurred while searching for the event' });
+    return res
+      .status(500)
+      .json({ error: 'An error occurred while searching for the event' });
   }
 };

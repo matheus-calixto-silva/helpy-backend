@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Ong } from '../../models/ong';
+import { Ong } from '@models/ong';
 import { IOng } from '../../types';
 
 import { genNewPasswordHash } from '@lib/genNewPasswordHash';

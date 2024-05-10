@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Ong } from '../../models/ong';
+import { Ong } from '@models/ong';
 
 export const listEventsByOng = async (req: Request, res: Response) => {
   const { ongId } = req.params;
@@ -8,8 +8,8 @@ export const listEventsByOng = async (req: Request, res: Response) => {
     path: 'events',
     populate: [
       { path: 'requiredSkills', populate: { path: 'category' } },
-      { path: 'volunteers' }
-    ]
+      { path: 'volunteers' },
+    ],
   });
 
   return res.status(200).json(ong?.events);

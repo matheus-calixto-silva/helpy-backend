@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Event } from '../../models/event';
+import { Event } from '@models/event';
 
 export const updateOngEvent = async (req: Request, res: Response) => {
   const { ongId, eventId } = req.params;
@@ -17,7 +17,8 @@ export const updateOngEvent = async (req: Request, res: Response) => {
     description,
     skills,
     volunteers,
-    maxVolunteers } = req.body;
+    maxVolunteers,
+  } = req.body;
 
   const parsedSkills = skills.split(',').map((skill: string) => skill.trim());
 
@@ -41,7 +42,6 @@ export const updateOngEvent = async (req: Request, res: Response) => {
       volunteers,
     };
 
-
     if (eventPic) {
       eventToUpdate.eventPic = eventPic;
     }
@@ -50,7 +50,7 @@ export const updateOngEvent = async (req: Request, res: Response) => {
 
     const eventWithPopulatedData = await Event.findById(eventId).populate([
       { path: 'requiredSkills', populate: { path: 'category' } },
-      { path: 'volunteers' }
+      { path: 'volunteers' },
     ]);
 
     return res.status(200).json(eventWithPopulatedData);
