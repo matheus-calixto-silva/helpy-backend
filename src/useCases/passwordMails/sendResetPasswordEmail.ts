@@ -6,7 +6,7 @@ import { Admin } from '@models/admin';
 import { Ong } from '@models/ong';
 import { User } from '@models/user';
 
-import { transporter } from '@utils/config';
+import { transporter } from '@lib/nodeMailer';
 import { IAdmin, IOng, IUser } from '../../types';
 
 import { env } from '@config/env';
