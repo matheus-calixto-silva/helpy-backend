@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
 
-import { Ong } from '../../models/ong';
+import { genNewPasswordHash } from '@lib/genNewPasswordHash';
+
+import { Ong } from '@models/ong';
 
 export const createOng = async (req: Request, res: Response) => {
   const profilePic = req.file?.filename;
-  const { name, username, email, password, phone, address, cnpj, maxEvents } = req.body;
+  const { name, username, email, password, phone, address, cnpj, maxEvents } =
+    req.body;
 
   const existingUser = await Ong.findOne({ username });
 
@@ -15,8 +17,7 @@ export const createOng = async (req: Request, res: Response) => {
     });
   }
 
-  const saltRounds = 10;
-  const passwordHash = await bcrypt.hash(password, saltRounds);
+  const passwordHash = await genNewPasswordHash(password);
 
   const ong = await Ong.create({
     name,
@@ -29,7 +30,7 @@ export const createOng = async (req: Request, res: Response) => {
     cnpj,
     maxEvents,
     events: [],
-    role: 'ong'
+    role: 'ong',
   });
 
   return res.status(201).send(ong);
