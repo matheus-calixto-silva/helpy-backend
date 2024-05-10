@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { Admin } from '@models/admin';
 
-import { genNewPasswordHash } from '@utils/helpers';
+import { genNewPasswordHash } from '@lib/genNewPasswordHash';
 
 export const createAdmin = async (req: Request, res: Response) => {
   const profilePic = req.file?.filename;
