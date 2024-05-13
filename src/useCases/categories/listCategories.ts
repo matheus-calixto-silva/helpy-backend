@@ -5,5 +5,9 @@ import { Category } from '@models/category';
 export const listCategories = async (_req: Request, res: Response) => {
   const categories = await Category.find();
 
-  return res.status(200).json(categories);
+  if (categories) {
+    return res.status(200).json(categories);
+  }
+
+  return res.status(204).send('No categories found.');
 };
