@@ -12,7 +12,7 @@ export const createAdmin = async (req: Request, res: Response) => {
 
   if (existingAdmin) {
     return res.status(400).json({
-      error: 'nome de usuário deve ser único',
+      error: 'username must be unique',
     });
   }
 
@@ -29,7 +29,11 @@ export const createAdmin = async (req: Request, res: Response) => {
     role: 'admin',
   });
 
-  const createdAdmin = await Admin.findById(admin._id.toString());
+  if (admin) {
+    const createdAdmin = await Admin.findById(admin._id.toString());
 
-  return res.status(201).json(createdAdmin);
+    return res.status(201).json(createdAdmin);
+  }
+
+  return res.status(500).json({ error: 'Unable to create admin' });
 };
