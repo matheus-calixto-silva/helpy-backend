@@ -13,7 +13,7 @@ export const createOng = async (req: Request, res: Response) => {
 
   if (existingUser) {
     return res.status(400).json({
-      error: 'nome de usuário deve ser único',
+      error: 'username must be unique',
     });
   }
 
@@ -33,5 +33,9 @@ export const createOng = async (req: Request, res: Response) => {
     role: 'ong',
   });
 
-  return res.status(201).send(ong);
+  if (ong) {
+    return res.status(201).send(ong);
+  }
+
+  return res.status(500).json({ error: 'Unable to create ong' });
 };
