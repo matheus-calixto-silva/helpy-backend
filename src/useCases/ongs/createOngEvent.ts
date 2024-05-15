@@ -65,7 +65,7 @@ export const createOngEvent = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json(ongWithPopulatedData);
-  } else {
-    return res.status(404).send({ error: 'Error: ONG not found' });
   }
+
+  return res.status(404).send({ error: 'Error: ONG not found' });
 };
