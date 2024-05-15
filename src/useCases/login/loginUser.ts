@@ -8,9 +8,9 @@ import { Admin } from '@models/admin';
 import { Ong } from '@models/ong';
 import { User } from '@models/user';
 
-import { IAdmin, IOng, IUser } from './../../types';
+import { env } from '@config/env';
 
-const env = process.env.SECRET as string;
+import { IAdmin, IOng, IUser } from './../../types';
 
 export const loginUser = async (req: Request, res: Response) => {
   const { username, password } = req.body;
@@ -36,7 +36,7 @@ export const loginUser = async (req: Request, res: Response) => {
     role: user.role,
   };
 
-  const token = jwt.sign(userForToken, env, {
+  const token = jwt.sign(userForToken, env.secretKey, {
     expiresIn: 168 * 60 * 60,
   });
 
