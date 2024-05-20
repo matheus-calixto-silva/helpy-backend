@@ -6,5 +6,9 @@ export const getSkillById = async (req: Request, res: Response) => {
   const { skillId } = req.params;
   const skill = await Skill.findById(skillId).populate('category');
 
-  return res.status(200).json(skill);
+  if (skill) {
+    return res.status(200).json(skill);
+  }
+
+  return res.status(404).send({ error: 'Error: Skill not found' });
 };
