@@ -17,7 +17,7 @@ export const createUser = async (req: Request, res: Response) => {
 
   if (existingUser) {
     return res.status(400).json({
-      error: 'nome de usuário deve ser único',
+      error: 'username must be unique',
     });
   }
 
@@ -36,12 +36,16 @@ export const createUser = async (req: Request, res: Response) => {
     role: 'user',
   });
 
-  const createdUser = await User.findById(user._id.toString()).populate({
-    path: 'skills.skill',
-    populate: {
-      path: 'category',
-    },
-  });
+  if (user) {
+    const createdUser = await User.findById(user._id.toString()).populate({
+      path: 'skills.skill',
+      populate: {
+        path: 'category',
+      },
+    });
 
-  return res.status(201).json(createdUser);
+    return res.status(201).json(createdUser);
+  }
+
+  return res.status(500).json({ error: 'Unable to create user' });
 };
