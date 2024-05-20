@@ -13,5 +13,9 @@ export const listUsers = async (_req: Request, res: Response) => {
     },
   });
 
-  return res.status(200).json(users);
+  if (users) {
+    return res.status(200).json(users);
+  }
+
+  return res.status(204);
 };
