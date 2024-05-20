@@ -30,7 +30,7 @@ export const removeOngEvent = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json(updatedOng?.events);
-  } else {
-    return res.status(404).send({ error: 'Error: ONG not found' });
   }
+
+  return res.status(404).send({ error: 'Error: ONG not found' });
 };
