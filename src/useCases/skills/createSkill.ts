@@ -6,5 +6,9 @@ export const createSkill = async (req: Request, res: Response) => {
   const { name, category } = req.body;
   const skill = await Skill.create({ name, category });
 
-  res.status(201).json(skill);
+  if (skill) {
+    return res.status(201).json(skill);
+  }
+
+  return res.status(500).json({ error: 'Unable to create skill' });
 };
