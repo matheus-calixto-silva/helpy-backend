@@ -12,5 +12,9 @@ export const listEventsByOng = async (req: Request, res: Response) => {
     ],
   });
 
-  return res.status(200).json(ong?.events);
+  if (ong) {
+    return res.status(200).json(ong?.events);
+  }
+
+  return res.status(204).send('No events found for this organization');
 };
