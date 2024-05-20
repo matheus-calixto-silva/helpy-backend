@@ -10,9 +10,9 @@ export const updateSkill = async (req: Request, res: Response) => {
     new: true,
   });
 
-  if (!updatedSkill) {
-    return res.status(404).send({ error: 'Category not found' });
+  if (updatedSkill) {
+    return res.status(200).json(updatedSkill);
   }
 
-  return res.status(200).json(updatedSkill);
+  return res.status(404).send({ error: 'Category not found' });
 };
