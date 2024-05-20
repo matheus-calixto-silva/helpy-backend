@@ -13,7 +13,7 @@ export const removeOng = async (req: Request, res: Response) => {
     await Ong.findByIdAndDelete(ongId);
     removePhoto(ong.profilePic);
     return res.sendStatus(204);
-  } else {
-    return res.status(404).send({ error: 'Error: ONG not found' });
   }
+
+  return res.status(404).send({ error: 'Error: ONG not found' });
 };
