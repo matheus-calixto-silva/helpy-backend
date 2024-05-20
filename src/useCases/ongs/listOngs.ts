@@ -11,5 +11,9 @@ export const listOngs = async (_req: Request, res: Response) => {
     ],
   });
 
-  return res.status(200).json(ongs);
+  if (ongs) {
+    return res.status(200).json(ongs);
+  }
+
+  return res.status(204);
 };
